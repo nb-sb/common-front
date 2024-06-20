@@ -14,7 +14,7 @@ export const Login = (data) => {
 // 注册方法
 export function register(data) {
   return request({
-    url: '/register',
+    url: '/api/user/register',
     headers: {
       isToken: false
     },

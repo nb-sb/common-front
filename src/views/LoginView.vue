@@ -153,9 +153,19 @@
 			Login(this.loginForm).then(response => {
 				console.log(response)
 				if(response.code == '0'){
-					Message({ message: response.msg, type: 'success' })
-					this.$router.push({ path: this.redirect || "/" }).catch(()=>{});
+					// this.$alert("<font color='red'>恭喜你，登录成功！</font>", '系统提示', {
+					// 	dangerouslyUseHTMLString: true,
+					// 	type: 'success'
+					// }).then(() => {
+					// 	this.$router.push("/home");
+					// }).catch(() => {});
+					this.$message({
+						message: '恭喜你，登录成功！',
+						type: 'success'
+					})
+					this.$router.push("/home");
 				}
+				
 			}).catch(() => {
 			  this.loading = false;
 			  if (this.captchaEnabled) {
