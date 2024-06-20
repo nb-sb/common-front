@@ -150,7 +150,7 @@
 			  Cookies.remove("password");
 			  Cookies.remove('rememberMe');
 			}
-			Login(this.loginForm).then(response => {
+			Login(this.loginForm).then(response =>       {
 				console.log(response)
 				if(response.code == '0'){
 					// this.$alert("<font color='red'>恭喜你，登录成功！</font>", '系统提示', {
