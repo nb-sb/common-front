@@ -8,7 +8,7 @@
   }
 
   .sidebarHide {
-    margin-left: 0!important;
+    margin-left: 0 !important;
   }
 
   .sidebar-container {
@@ -24,8 +24,8 @@
     left: 0;
     z-index: 1001;
     overflow: hidden;
-    -webkit-box-shadow: 2px 0 6px rgba(0,21,41,.35);
-    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    -webkit-box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+    box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
 
     // reset element-ui css
     .horizontal-collapse-transition {
@@ -70,7 +70,8 @@
       width: 100% !important;
     }
 
-    .el-menu-item, .el-submenu__title {
+    .el-menu-item,
+    .el-submenu__title {
       overflow: hidden !important;
       text-overflow: ellipsis !important;
       white-space: nowrap !important;
@@ -84,7 +85,7 @@
       }
     }
 
-    & .theme-dark .is-active > .el-submenu__title {
+    & .theme-dark .is-active>.el-submenu__title {
       color: $base-menu-color-active !important;
     }
 
@@ -212,7 +213,7 @@
     overflow-y: auto;
 
     &::-webkit-scrollbar-track-piece {
-      background: #d3dce6;
+      background: #6a6f74;
     }
 
     &::-webkit-scrollbar {

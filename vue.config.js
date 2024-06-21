@@ -3,6 +3,7 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
+// const CompressionPlugin = require('compression-webpack-plugin')
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
@@ -19,10 +20,46 @@ module.exports = defineConfig({
       }
     }
   },
+  css: {
+    loaderOptions: {
+      sass: {
+        sassOptions: { outputStyle: "expanded" },
+        // additionalData: `@import "@/assets/styles/variables.scss";`
+      }
+    }
+  },
+  configureWebpack: {
+    name: "vue-admin-template",
+    resolve: {
+      alias: {
+        '@': resolve('src')
+      }
+    },
+    plugins: [
+      // http://doc.ruoyi.vip/ruoyi-vue/other/faq.html#使用gzip解压缩静态文件
+      // new CompressionPlugin({
+      //   cache: false,                                  // 不启用文件缓存
+      //   test: /\.(js|css|html|jpe?g|png|gif|svg)?$/i,  // 压缩文件格式
+      //   filename: '[path][base].gz[query]',            // 压缩后的文件名
+      //   algorithm: 'gzip',                             // 使用gzip压缩
+      //   minRatio: 0.8,                                 // 压缩比例，小于 80% 的文件不会被压缩
+      //   deleteOriginalAssets: false                    // 压缩后删除原文件
+      // })
+    ],
+  },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
-
+    config.module
+      .rule('scss')
+      .oneOf('vue')
+      .use('style-resources-loader')
+      .loader('style-resources-loader')
+      .options({
+        patterns: [
+          path.resolve(__dirname, './src/assets/styles/variables.scss'),
+        ],
+      });
     // set svg-sprite-loader
     config.module
       .rule('svg')

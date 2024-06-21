@@ -1,30 +1,41 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    hihi
-    <br>
-    {{ sss }}
+    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <div :style="{ backgroundColor: variables.menuBackground }">12312331</div>
+    <!-- {{ variables.menuBackground }} -->
+    <p >Menu</p>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+// import HelloWorld from '@/components/HelloWorld.vue'
+import variables from '@/assets/styles/variables.module.scss'
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    // HelloWorld
   },
-  data(){
+  data() {
     return {
-      sss:0,
-      username: "!23"
+      // menuLightColor: variables.menuLightColor,
+      // menuBackground: variables.menuBackground
     }
   },
+  computed: {
+    variables(){
+      return variables;
+    }
+  },  
   created(){
-    this.sss = this.$store.state.count
+    console.log('variables2 :', variables);
+    // console.log('menuBackground:', this.menuBackground);
+    // console.log('menuLightColor:', this.menuLightColor);
   }
 }
 </script>
+<style lang="scss" scoped>
+@import "~@/assets/styles/variables.module.scss";
+p {
+  color: $menuBackground;
+}
+</style>
