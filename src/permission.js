@@ -23,6 +23,9 @@ store.dispatch('GenerateRoutes').then(accessRoutes => {
 })
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
   next()
 })
 
