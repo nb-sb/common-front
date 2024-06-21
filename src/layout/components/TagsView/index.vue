@@ -1,15 +1,25 @@
 <template>
   <div id="tags-view-container" class="tags-view-container">
-    <scroll-pane ref="scrollPane" class="tags-view-wrapper "  @scroll="handleScroll" >
-      <div style="display: inline-flex; ">
-        <ul class="app-process__op" style="height: 40px; margin-left: 20px;" >
-            <li class="item" style="border-radius: 4px 4px 4px 4px ;">
-              <i class="cl-iconfont el-icon-arrow-left" style="height: 40px;" @click="toBack"></i>
-            </li>
-        </ul>
-      </div>
-      
-      <router-link
+    <div class="app-process">
+      <ul class="app-process__op" style="border-radius: 5px;">
+        <li class="item" @click="toBack">
+          <i class="cl-iconfont el-icon-arrow-left"></i>
+        </li>
+        <li class="item" @click="toRefresh">
+          <i class="cl-iconfont el-icon-refresh"></i>
+        </li>
+        <li class="item" @click="toHome">
+          <i class="cl-iconfont el-icon-house"></i>
+        </li>
+      </ul>
+      <scroll-pane ref="scrollPane" class="tags-view-wrapper"  @scroll="handleScroll" >
+      <div style="display: flex;
+          align-items: center;
+          border-radius: 4px; 
+          height: 25px;
+          margin-right: 10px;
+          cursor: pointer;">
+        <router-link
         v-for="tag in visitedViews"
         ref="tag"
         :key="tag.path"
@@ -22,17 +32,21 @@
         @contextmenu.prevent.native="openMenu(tag,$event)"
       >
         {{ tag.title }}
-        <span v-if="!isAffix(tag)" class="el-icon-close" style="width: 13px; height: 13px;" @click.prevent.stop="closeSelectedTag(tag)""/>
+        <span v-if="!isAffix(tag)" @click.prevent.stop="closeSelectedTag(tag)" class="el-icon-close"></span>
       </router-link>
+      </div>
+      
     </scroll-pane>
-    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)"><i class="el-icon-refresh-right"></i> 刷新页面</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)"><i class="el-icon-close"></i> 关闭当前</li>
+    <ul v-show="visible" :style="{left:left+'px',top:(parseInt(top)-50) +'px'}" class="contextmenu">
+      <!-- <li @click="refreshSelectedTag(selectedTag)"><i class="el-icon-refresh-right"></i> 刷新页面</li> -->
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)"><i class="el-icon-back"></i> 关闭当前</li>
       <li @click="closeOthersTags"><i class="el-icon-circle-close"></i> 关闭其他</li>
       <li v-if="!isFirstView()" @click="closeLeftTags"><i class="el-icon-back"></i> 关闭左侧</li>
       <li v-if="!isLastView()" @click="closeRightTags"><i class="el-icon-right"></i> 关闭右侧</li>
       <li @click="closeAllTags(selectedTag)"><i class="el-icon-circle-close"></i> 全部关闭</li>
     </ul>
+    </div>
+    
   </div>
 </template>
 
@@ -267,8 +281,9 @@ export default {
 .tags-view-item:hover .el-icon-close {
   display: inline-block;
   margin-left: 8px;
-  background-color: #ddd;
-  color: #000000;
+  // background-color: #ddd;
+  color: red;
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -276,7 +291,7 @@ export default {
 .tags-view-container {
   height: 34px;
   width: 100%;
-  background: #fff;
+  background-color: #f4f4f4;
   margin-top: 5px;
   // border-bottom: 1px solid #d8dce5;
   // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
@@ -350,58 +365,115 @@ export default {
     padding: 0; /* Remove default padding */
     margin: 0; /* Remove default margin */
 		.item {
-      background: rgb(185, 185, 185);
-      height: 30px;
-      display: inline-block;
-			position: relative;
-			padding: 0 7px;
-			line-height: 26px;
-			color: #333;
+      position: relative;
+			padding: 0 10px;
+			line-height: 30px;
+			
 			cursor: pointer;
 			font-weight: bold;
-      &:not(:last-child)::after {
+			&:not(:last-child)::after {
 				display: block;
 				content: "";
 				position: absolute;
 				right: 0;
 				top: calc(50% - 5px);
-				// height: 10px;
-				// width: 1px;
+				height: 10px;
+				width: 1px;
 				background-color: #eee;
 			}
+
 			&:hover {
-				// color: var(--el-color-primary);
-        color: rgb(255, 255, 255);
+				color: var(--el-color-primary);
 			}
-      .cl-iconfont{
-        font-size:16px;
-        font-weight: 900;
-      }
+      
 		}
 	}
-</style>
-
-<style lang="scss">
-//reset element css of el-icon-close
-.tags-view-wrapper {
-  .tags-view-item {
-    .el-icon-close {
-      font-size: 10px;
-      vertical-align: 2px;
-      border-radius: 50%;
-      text-align: center;
-      transition: all .3s cubic-bezier(.645, .045, .355, 1);
-      transform-origin: 100% 50%;
-      &:before {
-        transform: scale(.6);
-        display: inline-block;
-        vertical-align: -3px;
-      }
-      &:hover {
-        background-color: #ff5f5f;
-        color: #fff;
-      }
+  i {
+    &:hover {
+      color: #ff0000 !important;
     }
   }
+</style>
+<style lang="scss" scoped>
+.app-process {
+	display: flex;
+	// align-items: center;
+	height: 30px;
+	position: relative;
+	margin: 0 0 10px 0;
+	padding: 0 10px;
+	user-select: none;
+
+	&__op {
+		display: flex;
+		background-color: #ffffff;
+		height: 30px;
+		border-radius: 4px;
+		margin-right: 10px;
+		list-style: none;
+    border: 1px solid #d8dce5;
+	}
+
+	&__container {
+		height: 30px;
+		flex: 1;
+		position: relative;
+		overflow: hidden;
+	}
+
+	&__scroller {
+		height: 40px;
+		width: 100%;
+		white-space: nowrap;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	&__item {
+		display: inline-flex;
+		align-items: center;
+		border-radius: 4px;
+		height: 30px;
+		padding: 0 10px;
+		background-color: #fff;
+		font-size: 12px;
+		margin-right: 10px;
+		color: #909399;
+		cursor: pointer;
+
+		
+
+		&:last-child {
+			margin-right: 0;
+		}
+
+		&:hover {
+			&:not(.active) {
+				background-color: #eee;
+			}
+		}
+
+		&.active {
+			background-color: var(--color-primary);
+
+			span {
+				color: #fff;
+			}
+
+			.el-icon {
+				color: #fff;
+			}
+		}
+
+		&:hover,
+		&.active {
+			.el-icon {
+				opacity: 1;
+				width: 13px;
+				margin-left: 5px;
+			}
+		}
+	}
 }
 </style>

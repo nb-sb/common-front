@@ -1,5 +1,6 @@
 // import request from '@/utils/request'
-
+//authour:@戏人看戏 王浩楠
+//实际上应该是从后端获取的路由，这里为了方便直接写死
 // 获取路由
 export function getRouters() {
   return {
@@ -299,14 +300,14 @@ export function getRouters() {
         ]
       },
       {
-        "name": "Ceshi",
+        "name": "测试",
         "path": "/ceshi",
         "hidden": false,
         "redirect": "noRedirect",
         "component": "Layout",
         "alwaysShow": true,
         "meta": {
-          "title": "ceshi",
+          "title": "测试",
           "icon": "tool",
           "noCache": false,
           "link": null
@@ -319,6 +320,18 @@ export function getRouters() {
             "component": "system/user/index",
             "meta": {
               "title": "用户管理",
+              "icon": "user",
+              "noCache": false,
+              "link": null
+            }
+          },
+          {
+            "name": "test",
+            "path": "test",
+            "hidden": false,
+            "component": "system/user/test",
+            "meta": {
+              "title": "用户测试",
               "icon": "user",
               "noCache": false,
               "link": null

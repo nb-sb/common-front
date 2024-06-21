@@ -1,6 +1,6 @@
 <template>
-  <div class="app-container">
-    公告
+  <div>
+    <p>公告</p>
   </div>
 </template>
 
