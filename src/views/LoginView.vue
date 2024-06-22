@@ -163,7 +163,7 @@
 						message: '恭喜你，登录成功！',
 						type: 'success'
 					})
-					this.$router.push("/home");
+					this.$router.push("/system/index");
 				}
 				
 			}).catch(() => {

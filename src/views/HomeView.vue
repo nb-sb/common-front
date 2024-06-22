@@ -1,10 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <div :style="{ backgroundColor: variables.menuBackground }">12312331</div>
-    <!-- {{ variables.menuBackground }} -->
-    <p >Menu</p>
+    这里是首页
+    
   </div>
 </template>
 <script>

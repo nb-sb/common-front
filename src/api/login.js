@@ -27,7 +27,7 @@ export function register(data) {
 export function getInfo() {
   return {
     "msg": "操作成功",
-    "code": 200,
+    "code": 0,
     "permissions": [
       "*:*:*"
     ],
@@ -114,10 +114,11 @@ export function getInfo() {
 
 // 退出方法
 export function logout() {
-  return request({
-    url: '/logout',
-    method: 'post'
-  })
+  return {
+    "msg": "退出成功",
+    "code": 0
+
+  }
 }
 
 // 获取验证码
